@@ -1,3 +1,3 @@
-module github.com/axterdoescode/pokedexcli
+module github.com/AxterDoesCode/pokedexcli
 
 go 1.20
