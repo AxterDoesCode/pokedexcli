@@ -1,15 +1,15 @@
 package main
 
 import (
-  "time"
-	"github.com/axterdoescode/pokedexcli/internal/pokeapi"
-  "internal/pokeapi"
+	"time"
+
+	"github.com/AxterDoesCode/pokedexcli/internal/pokeapi"
 )
 
 func main() {
-  pokeClient := pokeapi.NewClient(time.Second * 5)
+	pokeClient := pokeapi.NewClient(time.Second * 5)
 	cfg := &config{
-    pokeapiClient: pokeClient
-  }
+		pokeapiClient: pokeClient,
+	}
 	startRepl(cfg)
 }
