@@ -8,7 +8,6 @@ import (
 
 func (c *Client) GetLocation(locationName string) (Location, error) {
 	url := baseURL + "/location-area/" + locationName
-
 	if val, ok := c.cache.Get(url); ok {
 		locationsResp := Location{}
 		err := json.Unmarshal(val, &locationsResp)
