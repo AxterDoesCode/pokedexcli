@@ -9,7 +9,7 @@ import (
 )
 
 func commandCatch(cfg *config, args ...string) error {
-	if len(args) < 1 {
+	if len(args) != 1 {
 		return errors.New("You must provide a Pokemon Name")
 	}
 
@@ -22,8 +22,7 @@ func commandCatch(cfg *config, args ...string) error {
 
 	rand.Seed(time.Now().UnixNano())
 
-	catch := rand.Intn(101) > pokemon.CaptureRate
-
+	catch := rand.Intn(pokemon.BaseExperience) < 40
 	if catch {
 		fmt.Printf("You caught %s\n", pokemon.Name)
 		cfg.caughtPokemon[pokemon.Name] = pokemon
