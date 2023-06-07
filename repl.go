@@ -6,6 +6,7 @@ import (
 	"os"
 
 	"github.com/AxterDoesCode/pokedexcli/internal/pokeapi"
+	"github.com/AxterDoesCode/pokedexcli/internal/pokecache"
 )
 
 type cliCommand struct {
@@ -15,6 +16,7 @@ type cliCommand struct {
 }
 
 type config struct {
+	cache           pokecache.Cache
 	pokeapiClient   pokeapi.Client
 	nextLocationURL *string
 	prevLocationURL *string
