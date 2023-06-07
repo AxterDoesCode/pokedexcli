@@ -4,6 +4,7 @@ import (
 	"bufio"
 	"fmt"
 	"os"
+	"strings"
 
 	"github.com/AxterDoesCode/pokedexcli/internal/pokeapi"
 	"github.com/AxterDoesCode/pokedexcli/internal/pokecache"
@@ -12,7 +13,7 @@ import (
 type cliCommand struct {
 	name        string
 	description string
-	callback    func(*config) error
+	callback    func(*config, ...string) error
 }
 
 type config struct {
@@ -47,6 +48,12 @@ func getCommands() map[string]cliCommand {
 			description: "Get the previous page of locations",
 			callback:    commandMapb,
 		},
+
+		"explore": {
+			name:        "explore",
+			description: "Explore a location in the Pokemon world",
+			callback:    commandExplore,
+		},
 	}
 }
 
@@ -55,12 +62,21 @@ func startRepl(cfg *config) {
 	for {
 		fmt.Print("Pokedex >")
 		reader.Scan()
-		commandName := reader.Text()
+
+		words := strings.Fields(
+			reader.Text(),
+		) //.Text() returns a string of the entire input into the reader, strings.Fields splits the string
+
+		commandName := words[0]
+		args := []string{}
+		if len(words) > 1 {
+			args = words[1:]
+		}
 
 		command, exists := getCommands()[commandName]
 
 		if exists {
-			err := command.callback(cfg)
+			err := command.callback(cfg, args...)
 			if err != nil {
 				fmt.Println(err)
 			}
