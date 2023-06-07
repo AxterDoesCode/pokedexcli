@@ -5,7 +5,7 @@ import (
 	"fmt"
 	"os"
 
-	"github.com/axterdoescode/pokedexcli/internal/pokeapi"
+	"github.com/AxterDoesCode/pokedexcli/internal/pokeapi"
 )
 
 type cliCommand struct {
